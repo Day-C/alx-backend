@@ -57,10 +57,11 @@ class Server:
         }
 
         # set pre_page and next_page to none if out of context
-
+        # get thr range
+        ranges = index_range(page, page_size)
         if (page - 1) == 0:
             return_dict['prev_page'] = None
-        if (page + 1) > 19419:
+        if (page + 1) > ranges[1]:
             return_dict['next_page'] = None
         # inset data into the dict
         for i in range(len(result)):
