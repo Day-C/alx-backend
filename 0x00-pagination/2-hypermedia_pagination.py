@@ -38,7 +38,7 @@ class Server:
         # print(f"{idx_range[0]} {idx_range[1]}")
         # get api request
         data = self.dataset()
-        for i in range(idx_range[0], (idx_range[1] + 1)):
+        for i in range(idx_range[0], idx_range[1]):
             result.append(data[i])
         return result
 
