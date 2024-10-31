@@ -15,7 +15,7 @@ class BasicCache(BaseCaching):
         """Create a cache."""
 
         # add a new key[item] into the dictionary cache_data
-        if key is not None or item is not None:
+        if key is not None and item is not None:
             self.cache_data[key] = item
 
     def get(self, key):
