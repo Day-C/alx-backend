@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """fifo caching systm."""
-from ase_caching import BaseCaching
+from base_caching import BaseCaching
 
 
 class LFUCache (BaseCaching):
