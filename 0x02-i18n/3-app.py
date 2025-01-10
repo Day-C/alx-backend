@@ -1,48 +1,28 @@
 #!/usr/bin/env python3
 """Introduce bable."""
 from flask import Flask, render_template, request
-from flask_babel import Babel, _
-
-
-app = Flask(__name__)
+from flask_babel import Babel
 
 
 class Config:
-    """give language options to chose based on request,"""
-
+    """ l18n Config class """
     LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = "en"
-    BABEL_DEFAULT_TIMEZONE = "UTC"
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
+app = Flask(__name__)
+app.config.from_object("1-app.Config")
 babel = Babel(app)
 
 
-def configure_babel(app):
-    """Configure the app to work with bableand apply configs to it."""
-
-    babel.init_app(app)
-    app.config.from_object(Config)
-
-
-# configure app
-configure_babel(app)
+@app.route("/")
+def hello_world():
+    """ Handle default route """
+    return render_template("3-index.html")
 
 
 @babel.localeselector
 def get_locale():
-    """get locale best match from request."""
-
+    """ Gets the best matching language for user """
     return request.accept_languages.best_match(Config.LANGUAGES)
-
-
-@app.route('/')
-def home():
-    """domi home route."""
-
-    locale = get_locale()
-    return render_template('1-index.html', locale=locale)
-
-
-if __name__ == "__main__":
-    app.run()
